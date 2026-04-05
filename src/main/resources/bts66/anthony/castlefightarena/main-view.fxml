@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="480" prefWidth="640" spacing="20.0" styleClass="vbox" stylesheets="@css/castlefightarena.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bts66.anthony.castlefightarena.controllers.MainController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <ImageView fitHeight="272.0" fitWidth="598.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/banniere.png" />
+      </image>
+   </ImageView>
+
+  <Label prefHeight="46.0" prefWidth="244.0" styleClass="title" text="Castle Fight Arena" textAlignment="CENTER" textFill="#2f1a00">
+      <font>
+         <Font size="25.0" />
+      </font></Label>
+   <HBox alignment="CENTER" prefHeight="82.0" prefWidth="0.0">
+      <children>
+         <HBox alignment="CENTER" prefHeight="82.0" prefWidth="120.0">
+            <children>
+              <Button onAction="#onPlay" prefHeight="25.0" prefWidth="100.0" text="Jouer" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="82.0" prefWidth="120.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#onScore" style="-fx-background-color: orange;" text="Scores" />
+            </children>
+         </HBox>
+      </children>
+   </HBox>
+</VBox>

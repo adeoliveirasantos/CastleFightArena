@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="480" prefWidth="640" styleClass="vbox" stylesheets="@css/castlefightarena.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bts66.anthony.castlefightarena.controllers.BoardController">
+   <children>
+      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="640.0" spacing="15.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onRetour" prefHeight="30.0" prefWidth="49.0" style="-fx-background-color: blue; -fx-font-weight: bold;" text="&lt;&lt;" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#onQuit" prefHeight="30.0" prefWidth="10.0" style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE" />
+         </children>
+      </HBox>
+      <AnchorPane prefHeight="234.0" prefWidth="640.0">
+         <children>
+            <ImageView fitHeight="221.0" fitWidth="640.0" layoutY="13.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/backboard.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutY="11.0" prefHeight="221.0" prefWidth="640.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="elfe" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickedElfe" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/elfe.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="guerrier" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickedGuerrier" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/guerrier.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="nain" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickedNain" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/nain.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="sorciere" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickedSorciere" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/sorciere.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="242.0" prefWidth="640.0">
+         <children>
+            <ImageView fitHeight="242.0" fitWidth="326.0" layoutX="-6.0" pickOnBounds="true" style="-fx-effect: glow;">
+               <image>
+                  <Image url="@images/rockboard.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="242.0" fitWidth="326.0" layoutX="319.0" pickOnBounds="true" style="-fx-effect: glow;">
+               <image>
+                  <Image url="@images/rockboard.jpg" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="195.0" prefWidth="640.0" style="-fx-effect: glow;">
+               <children>
+                  <Button fx:id="launch" mnemonicParsing="false" onAction="#onLaunch" prefHeight="52.0" prefWidth="360.0" style="-fx-background-color: darkgrey;" text="Commencer le combat">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

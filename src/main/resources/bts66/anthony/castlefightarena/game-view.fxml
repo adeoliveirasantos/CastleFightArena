@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="480" prefWidth="640" spacing="20.0" styleClass="vbox" stylesheets="@css/castlefightarena.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bts66.anthony.castlefightarena.controllers.GameController">
+   <children>
+      <AnchorPane fx:id="rootPane" prefHeight="480.0" prefWidth="640.0">
+         <children>
+            <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/grass.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutY="140.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" prefWidth="170.0">
+               <children>
+                  <Label styleClass="life" text="                                        " />
+                  <Label fx:id="playerLifeLabel" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="470.0" layoutY="140.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="170.0">
+               <children>
+                  <Label styleClass="life" text="                                        " />
+                  <Label fx:id="botLifeLabel" />
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER" layoutY="165.0" prefHeight="133.0" prefWidth="640.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="playerPersonnage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="messageBox" alignment="CENTER" prefHeight="150.0" prefWidth="240.0" />
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="botPersonnage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <VBox layoutX="255.0" layoutY="336.0" prefHeight="130.0" prefWidth="130.0">
+               <children>
+                  <ImageView fx:id="sword" fitHeight="130.0" fitWidth="130.0" onMouseClicked="#onFight" onMouseEntered="#onTouch" onMouseExited="#onExit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/sword.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <Label layoutX="106.0" layoutY="43.0" styleClass="name" text="Joueur" textFill="WHITE" />
+            <Label layoutX="470.0" layoutY="43.0" styleClass="name" text="Robot" textFill="WHITE" />
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="245.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/versus.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

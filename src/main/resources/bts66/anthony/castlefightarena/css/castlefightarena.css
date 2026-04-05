@@ -1,0 +1,71 @@
+.vbox {
+    -fx-background-color: grey;
+}
+
+.title {
+    -fx-padding: 3;
+    -fx-font-weight: bold;
+    -fx-background-color: #ffcc0b;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-border-color: #fff;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+}
+
+.name {
+    -fx-padding: 5;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-background-color: #c21515;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-border-color: #fff;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+}
+
+.finish {
+    -fx-padding: 3;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-text-fill: #fff;
+    -fx-background-color: #0C99CF;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-border-color: #fff;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+}
+
+.button {
+    -fx-font-size: 16;
+    -fx-text-fill: #fff;
+    -fx-background-color: #35CC08;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-border-color: #fff;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+}
+
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.life {
+    -fx-background-radius: 8;
+    -fx-background-color: lime;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-border-color: #fff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.damage {
+    -fx-background-radius: 8;
+    -fx-background-color: white;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-border-color: #fff;
+}

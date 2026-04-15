@@ -36,11 +36,11 @@
          </children></HBox>
       <TableView fx:id="scoresTableView" prefHeight="417.0" prefWidth="640.0">
         <columns>
-          <TableColumn fx:id="nomColumn" prefWidth="170.0" text="Personnage" />
-          <TableColumn fx:id="victoiresColumn" prefWidth="120.0" text="Victoires" />
-            <TableColumn fx:id="defaitesColumn" prefWidth="120.0" text="Défaites" />
-            <TableColumn fx:id="totalPVColumn" prefWidth="115.0" text="Total PV" />
-            <TableColumn fx:id="ratioColumn" prefWidth="115.0" text="Ratio V/D" />
+          <TableColumn fx:id="nomColumn" prefWidth="170.0" text="Personnage" reorderable="false" />
+          <TableColumn fx:id="victoiresColumn" prefWidth="120.0" text="Victoires" reorderable="false" />
+            <TableColumn fx:id="defaitesColumn" prefWidth="120.0" text="Défaites" reorderable="false" />
+            <TableColumn fx:id="totalPVColumn" prefWidth="115.0" text="Total PV" reorderable="false" />
+            <TableColumn fx:id="ratioColumn" prefWidth="115.0" text="Ratio V/D" reorderable="false" />
         </columns>
       </TableView>
    </children>

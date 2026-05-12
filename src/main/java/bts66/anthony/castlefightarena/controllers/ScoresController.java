@@ -5,8 +5,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import bts66.anthony.castlefightarena.database.CombatDAO;
-import bts66.anthony.castlefightarena.model.StatistiquePersonnage;
+import bts66.anthony.castlefightarena.database.StatistiqueDAO;
+import bts66.anthony.castlefightarena.model.Personnage;
+import bts66.anthony.castlefightarena.model.Statistique;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,41 +23,43 @@ import static bts66.anthony.castlefightarena.App.changeScene;
 public class ScoresController implements Initializable {
 
     @FXML
-    private TableView<StatistiquePersonnage> scoresTableView;
+    private TableView<Statistique> scoresTableView;
 
     @FXML
-    private TableColumn<StatistiquePersonnage, String> nomColumn;
+    private TableColumn<Personnage, String> nomColumn;
 
     @FXML
-    private TableColumn<StatistiquePersonnage, Integer> victoiresColumn;
+    private TableColumn<Personnage, Integer> victoiresColumn;
 
     @FXML
-    private TableColumn<StatistiquePersonnage, Integer> defaitesColumn;
+    private TableColumn<Personnage, Integer> defaitesColumn;
 
     @FXML
-    private TableColumn<StatistiquePersonnage, Integer> totalPVColumn;
+    private TableColumn<Personnage, Integer> totalPVColumn;
 
     @FXML
-    private TableColumn<StatistiquePersonnage, String> ratioColumn;
+    private TableColumn<Personnage, String> ratioColumn;
 
     @FXML
     private Label totalCombatsLabel;
 
-    private ObservableList<StatistiquePersonnage> statistiquesData;
+    private ObservableList<Personnage> statistiquesData;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Configurer les colonnes du TableView
+        /*
         nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
         victoiresColumn.setCellValueFactory(cellData -> cellData.getValue().victoiresProperty().asObject());
         defaitesColumn.setCellValueFactory(cellData -> cellData.getValue().defaitesProperty().asObject());
         totalPVColumn.setCellValueFactory(cellData -> cellData.getValue().totalPointsVieProperty().asObject());
+        */
 
         // Colonne calculée pour le ratio
         ratioColumn.setCellValueFactory(cellData -> {
-            StatistiquePersonnage stat = cellData.getValue();
-            int victoires = stat.getVictoires();
-            int defaites = stat.getDefaites();
+            Personnage stat = cellData.getValue();
+            int victoires = stat.getStatistique().getVictoires();
+            int defaites = stat.getStatistique().getDefaites();
             String ratio;
             if (defaites == 0) {
                 ratio = victoires > 0 ? victoires + " - 0" : "Aucun combat";
@@ -74,7 +77,7 @@ public class ScoresController implements Initializable {
     private void loadStatistiques() {
         System.out.println("Chargement des statistiques...");
 
-        List<StatistiquePersonnage> statistiques = CombatDAO.getStatistiques();
+        List<Statistique> statistiques = new StatistiqueDAO().getAll();
 
         System.out.println("Nombre de statistiques reçues : " + statistiques.size());
 
@@ -82,9 +85,7 @@ public class ScoresController implements Initializable {
             System.out.println("ATTENTION : Aucune statistique n'a été récupérée de la base de données !");
         }
 
-        statistiquesData = FXCollections.observableArrayList(statistiques);
-        scoresTableView.setItems(statistiquesData);
-
+        // scoresTableView.setItems((ObservableList<Statistique>) statistiques);
         System.out.println("Statistiques chargées dans le TableView");
 
         // Calculer le total de combats

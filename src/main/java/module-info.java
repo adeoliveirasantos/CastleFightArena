@@ -9,6 +9,7 @@ module bts66.anthony.castlefightarena {
     requires javafx.graphics;
     requires javafx.base;
     requires java.sql;
+    requires static lombok;
 
     opens bts66.anthony.castlefightarena to javafx.fxml;
     exports bts66.anthony.castlefightarena;

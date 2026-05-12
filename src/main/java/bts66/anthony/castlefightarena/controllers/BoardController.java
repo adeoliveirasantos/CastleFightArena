@@ -10,23 +10,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import static bts66.anthony.castlefightarena.App.changeScene;
 
 public class BoardController {
-    private Personnage[] personnages;
+    private final List<Personnage> personnages = Arrays.asList(
+            new Personnage(0, TypePersonnage.ELFE, "Joueur", "description", 40, 5, null),
+            new Personnage(0, TypePersonnage.GUERRIER, "Joueur", "description", 40, 5, null),
+            new Personnage(0, TypePersonnage.NAIN, "Joueur", "description", 40, 5, null),
+            new Personnage(0, TypePersonnage.SORCIERE, "Joueur", "description", 40, 5, null)
+    );
     private Personnage personnage;
-    private final String nom;
-
-    public BoardController() {
-        this.nom = "Joueur";
-        this.personnages = new Personnage[]{
-                new Elfe(nom),
-                new Guerrier(nom),
-                new Nain(nom),
-                new Sorciere(nom)
-        };
-    }
 
     @FXML
     private Button launch;
@@ -67,25 +63,25 @@ public class BoardController {
 
     @FXML
     protected void onClickedElfe(MouseEvent mouseEvent) {
-        personnage = personnages[0];
+        personnage = personnages.get(0);
         appliquerEffet(elfe, new ImageView[]{guerrier, nain, sorciere});
     }
 
     @FXML
     protected void onClickedGuerrier(MouseEvent mouseEvent) {
-        personnage = personnages[1];
+        personnage = personnages.get(1);
         appliquerEffet(guerrier, new ImageView[]{elfe, nain, sorciere});
     }
 
     @FXML
     protected void onClickedNain(MouseEvent mouseEvent) {
-        personnage = personnages[2];
+        personnage = personnages.get(2);
         appliquerEffet(nain, new ImageView[]{elfe, guerrier, sorciere});
     }
 
     @FXML
     protected void onClickedSorciere(MouseEvent mouseEvent) {
-        personnage = personnages[3];
+        personnage = personnages.get(3);
         appliquerEffet(sorciere, new ImageView[]{elfe, guerrier, nain});
     }
 }

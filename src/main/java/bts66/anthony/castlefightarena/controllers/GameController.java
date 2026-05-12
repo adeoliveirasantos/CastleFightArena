@@ -19,12 +19,12 @@ public class GameController {
     private final Random random = new Random();
     private String blackEffect = "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);";
     private String whiteEffect = "-fx-effect: dropshadow(three-pass-box, rgba(255,255,255,1.8), 30, 0, 0, 0);";
-    private Personnage[] personnages = {
-            new Elfe("Bot"),
-            new Guerrier("Bot"),
-            new Nain("Bot"),
-            new Sorciere("Bot")
-    };
+    private final List<Personnage> personnages = Arrays.asList(
+            new Personnage(0, TypePersonnage.ELFE, "Bot", "description", 40, 5, null),
+            new Personnage(0, TypePersonnage.GUERRIER, "Bot", "description", 40, 5, null),
+            new Personnage(0, TypePersonnage.NAIN, "Bot", "description", 40, 5, null),
+            new Personnage(0, TypePersonnage.SORCIERE, "Bot", "description", 40, 5, null)
+    );
     private Personnage player;
     private Personnage bot;
 
@@ -46,21 +46,23 @@ public class GameController {
     public void setPlayer(Personnage player) {
         this.player = player;
         do {
-            this.bot = personnages[random.nextInt(3) + 1];
-        } while (bot.getClass().equals(player.getClass()));
+            this.bot = personnages.get(random.nextInt(3) + 1);
+        } while (bot.getType().equals(player.getType()));
 
-        this.playerPersonnage.setImage(new Image(player.getImage()));
-        this.botPersonnage.setImage(new Image(bot.getImage()));
+        this.playerPersonnage.setImage(new Image(player.getType().getImage()));
+        this.botPersonnage.setImage(new Image(bot.getType().getImage()));
         for (int i = 0; i < 6; i++) {
             Label placeholder = new Label("");
             messageBox.getChildren().add(placeholder);
         }
+        player.setVieCombat(player.getVie());
+        bot.setVieCombat(bot.getVie());
     }
 
     @FXML
     protected void onFight(MouseEvent mouseEvent) {
         if (this.player == null) return;
-        if (this.player.getVie() <= 0 || this.bot.getVie() <= 0) return;
+        if (this.player.getVieCombat() <= 0 || this.bot.getVieCombat() <= 0) return;
 
         // Application des dégâts au combat
         // 3 Difficultés :
@@ -69,14 +71,14 @@ public class GameController {
         // 5 à 12 de dégâts
         int playerDammage = random.nextInt(3, 8);
         int botDammage = random.nextInt(3, 8);
-        this.player.setVie(this.player.getVie() - botDammage);
-        this.bot.setVie(this.bot.getVie() - playerDammage);
+        this.player.setVieCombat(this.player.getVieCombat() - botDammage);
+        this.bot.setVieCombat(this.bot.getVieCombat() - playerDammage);
 
-        if (this.player.getVie() < 0) {
-            this.player.setVie(0);
+        if (this.player.getVieCombat() < 0) {
+            this.player.setVieCombat(0);
         }
-        if (this.bot.getVie() < 0) {
-            this.bot.setVie(0);
+        if (this.bot.getVieCombat() < 0) {
+            this.bot.setVieCombat(0);
         }
 
         // Chargement des bulles de message
@@ -95,27 +97,27 @@ public class GameController {
         messageBox.getChildren().removeFirst();
 
         // Mise à jour des barres de vie
-        if (this.player.getVie() < 40) {
+        if (this.player.getVieCombat() < 40) {
             playerLifeLabel.getStyleClass().add("damage");
         }
-        if (this.bot.getVie() < 40) {
+        if (this.bot.getVieCombat() < 40) {
             botLifeLabel.getStyleClass().add("damage");
         }
 
         String playerLifePlaceholder = "";
-        for (int i = 0; i < (40 - this.player.getVie()); i++) {
+        for (int i = 0; i < (40 - this.player.getVieCombat()); i++) {
             playerLifePlaceholder = playerLifePlaceholder + " ";
         }
         playerLifeLabel.setText(playerLifePlaceholder);
 
         String botLifePlaceholder = "";
-        for (int i = 0; i < (40 - this.bot.getVie()); i++) {
+        for (int i = 0; i < (40 - this.bot.getVieCombat()); i++) {
             botLifePlaceholder = botLifePlaceholder + " ";
         }
         botLifeLabel.setText(botLifePlaceholder);
 
         // Vérification de la fin du combat
-        if (this.player.getVie() <= 0 || this.bot.getVie() <= 0) {
+        if (this.player.getVieCombat() <= 0 || this.bot.getVieCombat() <= 0) {
             ImageView blackboard = new ImageView();
             blackboard.setImage(new Image("file:src/main/resources/bts66/anthony/castlefightarena/images/blackboard.png"));
             blackboard.setOpacity(0.5D);
@@ -143,13 +145,13 @@ public class GameController {
             });
             rootPane.getChildren().add(menuButton);
 
-            if (this.player.getVie() > this.bot.getVie()) {
+            if (this.player.getVieCombat() > this.bot.getVieCombat()) {
                 Label gagnantMessage = new Label("Le gagnant est le Joueur !");
                 gagnantMessage.getStyleClass().add("finish");
                 gagnantMessage.setLayoutX(190);
                 gagnantMessage.setLayoutY(160);
                 rootPane.getChildren().add(gagnantMessage);
-            } else if (this.player.getVie() < this.bot.getVie()) {
+            } else if (this.player.getVieCombat() < this.bot.getVieCombat()) {
                 Label gagnantMessage = new Label("Le gagnant est le Robot !");
                 gagnantMessage.getStyleClass().add("finish");
                 gagnantMessage.setLayoutX(190);

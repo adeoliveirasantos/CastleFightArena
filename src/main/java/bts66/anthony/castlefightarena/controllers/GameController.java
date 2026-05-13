@@ -1,5 +1,7 @@
 package bts66.anthony.castlefightarena.controllers;
 
+import bts66.anthony.castlefightarena.database.PersonnageDAO;
+import bts66.anthony.castlefightarena.database.StatistiqueDAO;
 import bts66.anthony.castlefightarena.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.*;
@@ -19,12 +22,10 @@ public class GameController {
     private final Random random = new Random();
     private String blackEffect = "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);";
     private String whiteEffect = "-fx-effect: dropshadow(three-pass-box, rgba(255,255,255,1.8), 30, 0, 0, 0);";
-    private final List<Personnage> personnages = Arrays.asList(
-            new Personnage(0, TypePersonnage.ELFE, "Bot", "description", 40, 5, null),
-            new Personnage(0, TypePersonnage.GUERRIER, "Bot", "description", 40, 5, null),
-            new Personnage(0, TypePersonnage.NAIN, "Bot", "description", 40, 5, null),
-            new Personnage(0, TypePersonnage.SORCIERE, "Bot", "description", 40, 5, null)
-    );
+
+    @Setter private StatistiqueDAO statistiqueDAO = null;
+    @Setter private PersonnageDAO personnageDAO = null;
+    @Setter private List<Personnage> personnages = null;
     private Personnage player;
     private Personnage bot;
 
@@ -45,12 +46,10 @@ public class GameController {
 
     public void setPlayer(Personnage player) {
         this.player = player;
-        do {
-            this.bot = personnages.get(random.nextInt(3) + 1);
-        } while (bot.getType().equals(player.getType()));
-
+        this.bot = personnages.get(random.nextInt(2) + 1);
         this.playerPersonnage.setImage(new Image(player.getType().getImage()));
         this.botPersonnage.setImage(new Image(bot.getType().getImage()));
+
         for (int i = 0; i < 6; i++) {
             Label placeholder = new Label("");
             messageBox.getChildren().add(placeholder);

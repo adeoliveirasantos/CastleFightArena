@@ -1,5 +1,8 @@
 package bts66.anthony.castlefightarena.controllers;
 
+import bts66.anthony.castlefightarena.database.PersonnageDAO;
+import bts66.anthony.castlefightarena.database.PersonnageSeeder;
+import bts66.anthony.castlefightarena.database.StatistiqueDAO;
 import bts66.anthony.castlefightarena.model.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -10,19 +13,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import static bts66.anthony.castlefightarena.App.changeScene;
 
 public class BoardController {
-    private final List<Personnage> personnages = Arrays.asList(
-            new Personnage(0, TypePersonnage.ELFE, "Joueur", "description", 40, 5, null),
-            new Personnage(0, TypePersonnage.GUERRIER, "Joueur", "description", 40, 5, null),
-            new Personnage(0, TypePersonnage.NAIN, "Joueur", "description", 40, 5, null),
-            new Personnage(0, TypePersonnage.SORCIERE, "Joueur", "description", 40, 5, null)
-    );
+    private final StatistiqueDAO statistiqueDAO;
+    private final PersonnageDAO personnageDAO;
+    private final List<Personnage> personnages;
     private Personnage personnage;
+
+    public BoardController() {
+        this.statistiqueDAO = new StatistiqueDAO();
+        this.personnageDAO = new PersonnageDAO(statistiqueDAO);
+        this.personnages = PersonnageSeeder.getPersonnages(personnageDAO);
+    }
 
     @FXML
     private Button launch;
@@ -38,8 +43,13 @@ public class BoardController {
     @FXML
     protected void onLaunch(ActionEvent actionEvent) throws IOException {
         if (personnage != null) {
+            personnages.remove(personnage);
             FXMLLoader game = changeScene("game-view.fxml", actionEvent);
-            ((GameController) game.getController()).setPlayer(personnage);
+            GameController gameController = game.getController();
+            gameController.setStatistiqueDAO(statistiqueDAO);
+            gameController.setPersonnageDAO(personnageDAO);
+            gameController.setPersonnages(personnages);
+            gameController.setPlayer(personnage);
         }
     }
 
@@ -63,7 +73,7 @@ public class BoardController {
 
     @FXML
     protected void onClickedElfe(MouseEvent mouseEvent) {
-        personnage = personnages.get(0);
+        personnage = personnages.getFirst();
         appliquerEffet(elfe, new ImageView[]{guerrier, nain, sorciere});
     }
 

@@ -108,12 +108,14 @@ public class StatistiqueDAO implements ModelDAO<Statistique, List<Statistique>> 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
-            Statistique stats = new Statistique(id);
-            stats.setWinRate(rs.getFloat("win_rate"));
-            stats.setVictoires(rs.getInt("victoires"));
-            stats.setDefaites(rs.getInt("defaites"));
-            stats.setDernierCombat(rs.getDate("dernier_combat"));
-            return stats;
+            if (rs.next()) {
+                Statistique stats = new Statistique(id);
+                stats.setWinRate(rs.getFloat("win_rate"));
+                stats.setVictoires(rs.getInt("victoires"));
+                stats.setDefaites(rs.getInt("defaites"));
+                stats.setDernierCombat(rs.getDate("dernier_combat"));
+                return stats;
+            }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération des résultats : " + e.getMessage());
             e.printStackTrace();

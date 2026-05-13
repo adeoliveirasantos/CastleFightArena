@@ -109,15 +109,17 @@ public class PersonnageDAO implements ModelDAO<Personnage, List<Personnage>> {
         try (Connection conn = DatabaseConnection.getInstance().getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            return new Personnage(
-                    id,
-                    TypePersonnage.valueOf(rs.getString("type")),
-                    rs.getString("nom"),
-                    rs.getString("description"),
-                    rs.getInt("vie"),
-                    rs.getInt("degats"),
-                    statistiqueDAO.getById(rs.getInt("id"))
-            );
+            if (rs.next()) {
+                return new Personnage(
+                        id,
+                        TypePersonnage.valueOf(rs.getString("type")),
+                        rs.getString("nom"),
+                        rs.getString("description"),
+                        rs.getInt("vie"),
+                        rs.getInt("degats"),
+                        statistiqueDAO.getById(rs.getInt("id"))
+                );
+            }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération du personnage : " + e.getMessage());
             e.printStackTrace();
